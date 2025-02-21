@@ -1,0 +1,361 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 0 20px;
+}
+
+/* 네비게이션 바 */
+.navbar {
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-brand a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.nav-menu {
+    display: flex;
+    gap: 20px;
+}
+
+.nav-item {
+    color: white;
+    text-decoration: none;
+    padding: 5px 10px;
+}
+
+.nav-item:hover {
+    background-color: #444;
+    border-radius: 3px;
+}
+
+.nav-search {
+    flex: 0 0 300px;
+}
+
+.search-form {
+    display: flex;
+    gap: 10px;
+}
+
+.search-form input {
+    flex: 1;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 3px;
+}
+
+.search-form button {
+    padding: 5px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.search-form button:hover {
+    background-color: #0056b3;
+}
+
+/* 콘텐츠 */
+h1 {
+    color: #333;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 10px;
+    margin-top: 20px;
+}
+
+.content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+/* 검색 결과 */
+.search-summary {
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.result-title {
+    margin-bottom: 5px;
+}
+
+.result-title a {
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+.result-path {
+    color: #666;
+    font-size: 0.9em;
+}
+
+.match-type {
+    display: inline-block;
+    padding: 2px 6px;
+    font-size: 0.8em;
+    border-radius: 3px;
+    margin-left: 10px;
+}
+
+.match-type.title {
+    background-color: #28a745;
+    color: white;
+}
+
+.match-type.tag {
+    background-color: #17a2b8;
+    color: white;
+}
+
+.match-type.content {
+    background-color: #6c757d;
+    color: white;
+}
+
+.search-tips {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+}
+
+.search-tips h3 {
+    color: #333;
+    margin-top: 0;
+}
+
+.search-tips ul {
+    margin: 10px 0 0;
+    padding-left: 20px;
+}
+
+.search-tips li {
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.no-results {
+    color: #dc3545;
+    font-weight: bold;
+}
+
+.result {
+    margin-top: 20px;
+}
+
+.result ul {
+    list-style: none;
+    padding: 0;
+}
+
+.result li {
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.result a {
+    text-decoration: none;
+    color: #007bff;
+}
+
+.result a:hover {
+    text-decoration: underline;
+}
+
+/* 편집 폼 */
+.edit-form {
+    margin: 20px 0;
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.edit-form label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+    font-weight: bold;
+}
+
+.edit-form input[type="text"] {
+    width: 100%;
+    max-width: 300px;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.edit-form textarea {
+    width: 100%;
+    min-height: 400px;
+    padding: 10px;
+    margin-bottom: 15px;
+    font-family: monospace;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    line-height: 1.5;
+}
+
+.edit-buttons {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.edit-buttons button,
+.edit-buttons .button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.edit-buttons button {
+    background-color: #28a745;
+    color: white;
+}
+
+.edit-buttons button:hover {
+    background-color: #218838;
+}
+
+.edit-buttons .cancel {
+    background-color: #dc3545;
+    color: white;
+}
+
+.edit-buttons .cancel:hover {
+    background-color: #c82333;
+}
+
+.edit-help {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+.edit-help h3 {
+    color: #333;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.edit-help ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.edit-help li {
+    color: #666;
+    margin-bottom: 5px;
+}
+
+/* 푸터 */
+.footer {
+    margin-top: 40px;
+    padding: 20px 0;
+    text-align: center;
+    color: #666;
+    font-size: 12px;
+    border-top: 1px solid #ddd;
+}
+
+/* 리비전 기록 */
+.history-list {
+    margin: 20px 0;
+}
+
+.history-item {
+    background-color: white;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.history-meta {
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.history-user {
+    font-weight: bold;
+    color: #333;
+}
+
+.history-time {
+    color: #666;
+    margin-left: 10px;
+    font-size: 0.9em;
+}
+
+.history-changes {
+    font-family: monospace;
+}
+
+.change-item {
+    margin: 5px 0;
+}
+
+.change-type {
+    display: inline-block;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 0.8em;
+    margin-right: 10px;
+}
+
+.change-type.add {
+    background-color: #28a745;
+    color: white;
+}
+
+.change-type.delete {
+    background-color: #dc3545;
+    color: white;
+}
+
+.change-type.modify {
+    background-color: #ffc107;
+    color: black;
+}
+
+.change-text {
+    display: inline-block;
+    margin: 0;
+    padding: 5px;
+    background-color: #f8f9fa;
+    border-radius: 3px;
+    font-size: 0.9em;
+    white-space: pre-wrap;
+    word-break: break-all;
+} 
