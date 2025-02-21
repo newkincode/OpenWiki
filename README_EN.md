@@ -1,57 +1,114 @@
-# OpenWiki Document Structure
+# OpenWiki
 
-OpenWiki uses a special file structure to manage wiki documents.
+OpenWiki is a wiki engine based on Python and Flask.
 
-## File Structure
+## Features
 
-Each wiki document has a `.opwi` extension and consists of the following structure:
+- Markdown syntax support
+- Document revision history
+- Inter-document links (`[[document name]]`)
+- Document search (title, content, tags)
+- User contribution tracking
+- Namespace support
 
-### Document Header
-```
-DOC:[UUID v7]
-```
-- Each document is identified by a unique UUID v7
-- Example: `DOC:067b6e84-fdbe-73a1-8000-85d847465a72`
+## Project Structure
 
-### Revision Information
 ```
-REVUSER:[Username]:[IP Address]
-REV:[SHA256 Hash]
-```
-- `REVUSER`: Records the username and IP address of the user who made the modification
-- `REV`: SHA256 hash value of the document data including timestamp
-- Example:
-  - `REVUSER:Sinoka:61.72.114.110`
-  - `REV:db7a3c5284dc93ddec1c8e3e426478eec5889b2673ade6144059de594e876a01`
-
-### Document Content Changes
-```
-[Change Type][Line Number]|[Start Index]|[End Index]:[Content]
-```
-- Change Types:
-  - `+`: Addition
-  - `-`: Deletion
-  - `=`: Modification
-- Line Number: The line where the change occurred
-- Start Index: The character position where the change begins
-- End Index: The character position where the change ends
-- Content: The actual text content of the document
-
-Example:
-```
-+0|0|10:오픈위키 대문입니다.
-=0|0|10:안녕이친구야우리같이놀자
+OpenWiki/
+├── main.py                 # Flask application main file
+├── parser/                 # Document parsing modules
+│   ├── __init__.py
+│   └── parser.py          # OPWI file parser
+├── rev_system/            # Document management system
+│   ├── __init__.py
+│   └── document.py        # Document and DocumentManager classes
+├── static/                # Static files
+│   ├── css/
+│   │   └── style.css     # Stylesheet
+│   └── js/
+│       └── search.js     # Search functionality script
+├── templates/             # HTML templates
+│   ├── base.html         # Base template
+│   ├── edit.html         # Document edit page
+│   ├── create.html       # Document creation page
+│   ├── history.html      # Revision history page
+│   ├── search.html       # Search results page
+│   └── 404.html          # 404 error page
+├── pages/                # Wiki document storage
+│   └── main/            # Main namespace
+│       └── *.opwi       # Wiki document files
+└── index/               # Document index
+    └── document_index.json  # Document metadata index
 ```
 
-## Sample Document
+## OPWI File Structure
+
+OpenWiki uses a special file format with the `.opwi` extension:
+
 ```
-DOC:067b6e84-fdbe-73a1-8000-85d847465a72
-REVUSER:Sinoka:61.72.114.110
-REV:db7a3c5284dc93ddec1c8e3e426478eec5889b2673ade6144059de594e876a01
-+0|0|10:오픈위키 대문입니다.
-REVUSER:Sinoka:61.72.114.110
-REV:-----
-=0|0|10:안녕이친구야우리같이놀자
+DOC:[UUID]                # Document unique ID (UUID v4)
+META:[JSON metadata]      # Document metadata (title, creation date, tags, etc.)
+REVUSER:[user]:[IP]      # User who made the modification
+REVBLOCK:START           # Start of change block
+CHANGES:[changes JSON]    # Changes (additions/deletions/modifications)
+REVBLOCK:END             # End of change block
 ```
 
-This structure allows for accurate tracking and management of document revision history. 
+### Change Format
+
+Changes are recorded in the following format:
+- `+line|start|end:content` : Content addition
+- `-line|start|end:content` : Content deletion
+- `=line|start|end:content` : Content modification
+
+## Installation
+
+1. Clone repository:
+```bash
+git clone https://github.com/FamilyMink5/OpenWiki.git
+cd OpenWiki
+```
+
+2. Create and activate virtual environment:
+```bash
+python -m venv venv
+source venv/bin/activate  # Linux/Mac
+venv\Scripts\activate     # Windows
+```
+
+3. Install dependencies:
+```bash
+pip install -r requirements.txt
+```
+
+4. Run server:
+```bash
+python main.py
+```
+
+## Usage
+
+1. Create document:
+   - Click "New Document" button
+   - Enter title and content
+   - Markdown syntax supported
+
+2. Edit document:
+   - Click "Edit" button on document page
+   - Modify content and save
+
+3. Link documents:
+   - Use `[[document name]]` format to link to other documents
+   - Automatically redirects to creation page for non-existent documents
+
+4. Search documents:
+   - Enter search term in top search bar
+   - Supports search by title, content, and tags
+
+5. View history:
+   - Click "History" button on document page
+   - View all changes and contributors
+
+## License
+
+This project is licensed under the MIT License. 
