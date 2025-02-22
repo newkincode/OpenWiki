@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }} - OpenWiki</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">
+            <a href="/">OpenWiki</a>
+        </div>
+        <div class="nav-menu">
+            <a href="/" class="nav-item">대문</a>
+            <a href="/create" class="nav-item">새 문서</a>
+            <a href="/edit/{{ title }}" class="nav-item">편집</a>
+            <a href="/history/{{ title }}" class="nav-item">역사</a>
+        </div>
+        <div class="nav-search">
+            <form action="/search" method="get" class="search-form">
+                <input type="text" name="query" id="search-input" placeholder="검색어를 입력하세요">
+                <button type="submit">검색</button>
+            </form>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>{{ title }}</h1>
+
+        <div class="content">
+            {{ content }}
+        </div>
+
+        <div class="footer">
+            <p>OpenWiki Engine™ by Sinoka</p>
+        </div>
+    </div>
+
+    <script src="/static/js/search.js"></script>
+</body>
+</html> 

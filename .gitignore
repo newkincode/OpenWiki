@@ -1,2 +1,10 @@
 ./.macvenv/** */
 ./.winvenv/** */
+venu/*
+__pycache__/
+*.pyc
+venv/
+templates/doc/
+.vscode/
+.idea/
+*.log

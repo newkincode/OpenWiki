@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ docname }} 변경 이력 - OpenWiki</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">
+            <a href="/">OpenWiki</a>
+        </div>
+        <div class="nav-menu">
+            <a href="/" class="nav-item">대문</a>
+            <a href="/doc/{{ docname }}" class="nav-item">문서보기</a>
+            <a href="/edit/{{ docname }}" class="nav-item">편집</a>
+        </div>
+        <div class="nav-search">
+            <form action="/search" method="get" class="search-form">
+                <input type="text" name="query" id="search-input" placeholder="검색어를 입력하세요">
+                <button type="submit">검색</button>
+            </form>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>{{ docname }} 변경 이력</h1>
+        
+        <div class="history-list">
+            {% if revisions %}
+                <ul>
+                    {% for rev in revisions %}
+                        <li class="history-item">
+                            <div class="history-meta">
+                                <span class="history-user">{{ rev.username }}</span>
+                                <span class="history-time">{{ rev.timestamp }}</span>
+                            </div>
+                            <div class="history-changes">
+                                {% for change in rev.changes %}
+                                    {% for op, text in change.items() %}
+                                        <div class="change-item">
+                                            {% if op.startswith('+') %}
+                                                <span class="change-type add">추가</span>
+                                            {% elif op.startswith('-') %}
+                                                <span class="change-type delete">삭제</span>
+                                            {% else %}
+                                                <span class="change-type modify">수정</span>
+                                            {% endif %}
+                                            <pre class="change-text">{{ text }}</pre>
+                                        </div>
+                                    {% endfor %}
+                                {% endfor %}
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>변경 이력이 없습니다.</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>OpenWiki Engine™ by Sinoka</p>
+    </div>
+</body>
+</html> 

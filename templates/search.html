@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>검색 결과 - OpenWiki</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">
+            <a href="/">OpenWiki</a>
+        </div>
+        <div class="nav-menu">
+            <a href="/" class="nav-item">대문</a>
+        </div>
+        <div class="nav-search">
+            <form action="/search" method="get" class="search-form">
+                <input type="text" name="query" id="search-box" placeholder="검색어를 입력하세요..." value="{{ query }}">
+                <button type="submit">검색</button>
+            </form>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>검색 결과</h1>
+        <p class="search-summary">
+            {% if query %}
+                "{{ query }}"에 대한 검색 결과 {{ results|length }}건
+            {% endif %}
+        </p>
+
+        <div class="result">
+            {% if results %}
+                <ul>
+                    {% for result in results %}
+                        <li>
+                            <div class="result-title">
+                                <a href="/doc/{{ result.path }}">{{ result.title }}</a>
+                                {% if result.match_type == 'title' %}
+                                    <span class="match-type title">제목 일치</span>
+                                {% elif result.match_type == 'tag' %}
+                                    <span class="match-type tag">태그 일치</span>
+                                {% elif result.match_type == 'content' %}
+                                    <span class="match-type content">내용 일치</span>
+                                {% endif %}
+                            </div>
+                            <div class="result-path">{{ result.path }}</div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                {% if query %}
+                    <p class="no-results">검색 결과가 없습니다.</p>
+                    <div class="search-tips">
+                        <h3>검색 팁</h3>
+                        <ul>
+                            <li>모든 단어의 철자가 정확한지 확인해 보세요.</li>
+                            <li>다른 검색어를 사용해 보세요.</li>
+                            <li>더 일반적인 검색어를 사용해 보세요.</li>
+                        </ul>
+                    </div>
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>OpenWiki Engine™ by Sinoka</p>
+    </div>
+</body>
+</html> 

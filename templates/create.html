@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>새 문서 생성 - OpenWiki</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">
+            <a href="/">OpenWiki</a>
+        </div>
+        <div class="nav-menu">
+            <a href="/" class="nav-item">대문</a>
+            <a href="/create" class="nav-item">새 문서</a>
+        </div>
+        <div class="nav-search">
+            <form action="/search" method="get" class="search-form">
+                <input type="text" name="query" id="search-input" placeholder="검색어를 입력하세요">
+                <button type="submit">검색</button>
+            </form>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>새 문서 생성</h1>
+        
+        <form class="edit-form" method="post">
+            <div>
+                <label for="title">문서 제목:</label><br>
+                <input type="text" id="title" name="title" required>
+            </div>
+            
+            <div>
+                <label for="username">사용자 이름:</label><br>
+                <input type="text" id="username" name="username" required>
+            </div>
+            
+            <div>
+                <label for="content">내용:</label><br>
+                <textarea id="content" name="content" required></textarea>
+            </div>
+            
+            <div class="edit-buttons">
+                <button type="submit">생성</button>
+                <a href="/" class="button cancel">취소</a>
+            </div>
+        </form>
+
+        <div class="edit-help">
+            <h3>편집 도움말</h3>
+            <ul>
+                <li>문서는 마크다운 문법을 지원합니다.</li>
+                <li>다른 문서 링크: [[문서명]]</li>
+                <li>문서 리다이렉트: [[redirect:문서명]]</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>OpenWiki Engine™ by Sinoka</p>
+    </div>
+</body>
+</html> 
