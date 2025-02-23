@@ -34,6 +34,11 @@ def parse_opwi(content: str) -> str:
                                 for op, text in change.items():
                                     if op.startswith('+'):
                                         content_blocks.append(text)
+                                    elif op.startswith('='):
+                                        content_blocks.pop(-1)
+                                        content_blocks.append(text)
+                                    elif op.startswith('-'):
+                                        content_blocks.pop(-1)
                 except json.JSONDecodeError:
                     print(f"Warning: Invalid CHANGES JSON format in {doc_id}")
             current_block = None
