@@ -1,112 +1,86 @@
 {
-  "last_updated": "2025-02-23T19:37:29.636228",
+  "last_updated": "2025-02-24T11:48:56.978259",
   "documents": {
-    "067b6e84-fdbe-73a1-8000-85d847465a72": {
+    "오픈위키/대문": {
       "title": "대문",
-      "path": "/pages/main/대문.opwi",
-      "namespace": "main",
-      "created_at": "2024-03-21T00:00:00Z",
-      "last_modified": "2025-02-21T23:52:45.953090",
-      "revision_count": 4,
-      "contributors": [
-        "밍크"
-      ]
-    },
-    "067b6e84-fdbe-73a1-8001-85d847465a72": {
-      "title": "인덱스",
-      "path": "/pages/main/index.opwi",
-      "namespace": "main",
-      "created_at": "2024-03-21T00:00:00Z",
-      "last_modified": "2024-03-21T00:00:00Z",
+      "path": "오픈위키/대문.opwi",
+      "namespace": "오픈위키",
+      "created_at": "2025-02-24T11:48:56.978074",
+      "last_modified": "2025-02-24T11:48:56.978083",
       "revision_count": 1,
-      "contributors": [
-        "Sinoka"
-      ]
+      "contributors": []
     },
-    "067b6e84-fdbe-73a1-8002-85d847465a72": {
-      "title": "검색",
-      "path": "/pages/main/search.opwi",
-      "namespace": "main",
-      "created_at": "2024-03-21T00:00:00Z",
-      "last_modified": "2024-03-21T00:00:00Z",
-      "revision_count": 1,
-      "contributors": [
-        "Sinoka"
-      ]
-    },
-    "067b6e84-fdbe-73a1-8003-85d847465a72": {
-      "title": "404 - 페이지를 찾을 수 없음",
-      "path": "/pages/main/404.opwi",
-      "namespace": "main",
-      "created_at": "2024-03-21T00:00:00Z",
-      "last_modified": "2024-03-21T00:00:00Z",
-      "revision_count": 1,
-      "contributors": [
-        "Sinoka"
-      ]
-    },
-    "067b6e84-fdbe-73a1-8004-85d847465a72": {
-      "title": "문서 기본 템플릿",
-      "path": "/pages/main/docs_base.opwi",
-      "namespace": "main",
-      "created_at": "2024-03-21T00:00:00Z",
-      "last_modified": "2024-03-21T00:00:00Z",
-      "revision_count": 1,
-      "contributors": [
-        "Sinoka"
-      ]
-    },
-    "e1734cd2-5538-42ca-9c6d-73e337ce3d46": {
+    "main/FamilyMink5": {
       "title": "FamilyMink5",
-      "path": "/pages/main/FamilyMink5.opwi",
+      "path": "main/FamilyMink5.opwi",
       "namespace": "main",
-      "created_at": "2025-02-21T23:50:40.887315",
-      "last_modified": "2025-02-23T19:37:29.635371",
-      "revision_count": 3,
-      "contributors": [
-        "Sinoka",
-        "나는 테러단이다.",
-        "밍크"
-      ]
-    },
-    "90ad525b-a7cc-436c-9067-c32ead9bfa4c": {
-      "title": "왜캐바꿔놈",
-      "path": "/pages/main/왜캐바꿔놈.opwi",
-      "namespace": "main",
-      "created_at": "2025-02-23T19:27:35.543470",
-      "last_modified": "2025-02-23T19:27:35.543496",
+      "created_at": "2025-02-24T11:48:56.978138",
+      "last_modified": "2025-02-24T11:48:56.978139",
       "revision_count": 1,
-      "contributors": [
-        "Sinoka"
-      ]
+      "contributors": []
     },
-    "a70e13bb-448a-40ed-8184-6846c6a4c698": {
+    "main/안녕": {
+      "title": "안녕",
+      "path": "main/안녕.opwi",
+      "namespace": "main",
+      "created_at": "2025-02-24T11:48:56.978155",
+      "last_modified": "2025-02-24T11:48:56.978156",
+      "revision_count": 1,
+      "contributors": []
+    },
+    "main/간디": {
+      "title": "간디",
+      "path": "main/간디.opwi",
+      "namespace": "main",
+      "created_at": "2025-02-24T11:48:56.978171",
+      "last_modified": "2025-02-24T11:48:56.978172",
+      "revision_count": 1,
+      "contributors": []
+    },
+    "main/디시인사이드": {
       "title": "디시인사이드",
-      "path": "/pages/main/디시인사이드.opwi",
+      "path": "main/디시인사이드.opwi",
       "namespace": "main",
-      "created_at": "2025-02-23T19:30:46.992675",
-      "last_modified": "2025-02-23T19:30:46.992701",
+      "created_at": "2025-02-24T11:48:56.978187",
+      "last_modified": "2025-02-24T11:48:56.978188",
       "revision_count": 1,
-      "contributors": [
-        "Sinoka"
-      ]
+      "contributors": []
     },
-    "066f20f7-5f5b-44ac-b76d-a46a78a9b518": {
-      "title": "오픈위키/대문",
-      "path": "/pages/main/오픈위키/대문.opwi",
+    "main/왜캐바꿔놈": {
+      "title": "왜캐바꿔놈",
+      "path": "main/왜캐바꿔놈.opwi",
       "namespace": "main",
-      "created_at": "2025-02-23T19:32:43.129093",
-      "last_modified": "2025-02-23T19:32:43.129130",
+      "created_at": "2025-02-24T11:48:56.978203",
+      "last_modified": "2025-02-24T11:48:56.978203",
       "revision_count": 1,
-      "contributors": [
-        "ㅇㅇㅇ"
-      ]
+      "contributors": []
+    },
+    "main/오픈위키/대문": {
+      "title": "대문",
+      "path": "main/오픈위키/대문.opwi",
+      "namespace": "main/오픈위키",
+      "created_at": "2025-02-24T11:48:56.978257",
+      "last_modified": "2025-02-24T11:48:56.978258",
+      "revision_count": 1,
+      "contributors": []
     }
   },
   "namespaces": {
     "main": {
       "path": "/pages/main",
       "description": "메인 네임스페이스"
+    },
+    ".": {
+      "path": "/pages/.",
+      "description": "자동 추가된 네임스페이스"
+    },
+    "main/오픈위키": {
+      "path": "/pages/main/오픈위키",
+      "description": "자동 추가된 네임스페이스"
+    },
+    "오픈위키": {
+      "path": "/pages/오픈위키",
+      "description": "자동 추가된 네임스페이스"
     }
   }
 }

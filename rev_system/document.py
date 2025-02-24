@@ -178,9 +178,9 @@ class DocumentManager:
         self.index_path = os.path.join(base_path, "index", "document_index.json")
         self.pages_path = os.path.join(base_path, "pages")
         self.load_index()
-    
+
     def load_index(self):
-        """문서 인덱스를 로드합니다."""
+        """문서 인덱스를 로드하고, 하위 폴더까지 자동으로 검색"""
         if os.path.exists(self.index_path):
             with open(self.index_path, "r", encoding="utf-8") as f:
                 self.index = json.load(f)
@@ -188,38 +188,58 @@ class DocumentManager:
             self.index = {
                 "last_updated": datetime.now().isoformat(),
                 "documents": {},
-                "namespaces": {
-                    "main": {
-                        "path": "/pages/main",
-                        "description": "메인 네임스페이스"
-                    }
-                }
+                "namespaces": {}
             }
-    
+        
+        # 모든 문서를 재귀적으로 탐색하여 인덱스 업데이트
+        self.index["documents"] = {}
+        for root, _, files in os.walk(self.pages_path):
+            namespace = os.path.relpath(root, self.pages_path).replace("\\", "/")  # 네임스페이스 경로 저장
+            if namespace not in self.index["namespaces"]:
+                self.index["namespaces"][namespace] = {"path": f"/pages/{namespace}", "description": "자동 추가된 네임스페이스"}
+
+            for file in files:
+                if file.endswith(".opwi"):
+                    doc_path = os.path.join(root, file)
+                    doc_relative_path = os.path.relpath(doc_path, self.pages_path).replace("\\", "/")  # 상대 경로 사용
+                    doc_id = os.path.splitext(doc_relative_path)[0]  # `.opwi` 확장자 제거
+
+                    self.index["documents"][doc_id] = {
+                        "title": os.path.splitext(file)[0],
+                        "path": doc_relative_path,
+                        "namespace": namespace,
+                        "created_at": datetime.now().isoformat(),
+                        "last_modified": datetime.now().isoformat(),
+                        "revision_count": 1,
+                        "contributors": []
+                    }
+
+        self.save_index()
+
     def save_index(self):
-        """문서 인덱스를 저장합니다."""
+        """문서 인덱스를 저장"""
         self.index["last_updated"] = datetime.now().isoformat()
         os.makedirs(os.path.dirname(self.index_path), exist_ok=True)
         with open(self.index_path, "w", encoding="utf-8") as f:
             json.dump(self.index, f, ensure_ascii=False, indent=2)
-    
-    def create_document(self, title: str, content: str, username: str, ip_address: str, namespace: str = "main") -> Document:
-        """새 문서를 생성합니다."""
+
+    def create_document(self, title: str, content: str, username: str, ip_address: str, namespace: str = "") -> Document:
+        """하위 폴더까지 지원하는 문서 생성"""
         doc = Document(title, namespace)
         revision_data = doc.add_content(content, username, ip_address)
-        
-        # 문서 저장
-        namespace_path = os.path.join(self.pages_path, namespace)
-        os.makedirs(namespace_path, exist_ok=True)
-        
-        doc_path = os.path.join(namespace_path, f"{title}.opwi")
+
+        # 문서 저장 경로 설정 (네임스페이스 유지)
+        doc_path = os.path.join(self.pages_path, namespace, f"{title}.opwi") if namespace else os.path.join(self.pages_path, f"{title}.opwi")
+        os.makedirs(os.path.dirname(doc_path), exist_ok=True)
+
         with open(doc_path, "w", encoding="utf-8") as f:
             f.write(doc.to_opwi())
-        
+
         # 인덱스 업데이트
-        self.index["documents"][doc.doc_id] = {
+        doc_id = os.path.join(namespace, title).replace("\\", "/").strip("/")
+        self.index["documents"][doc_id] = {
             "title": title,
-            "path": f"/pages/{namespace}/{title}.opwi",
+            "path": os.path.relpath(doc_path, self.pages_path).replace("\\", "/"),
             "namespace": namespace,
             "created_at": doc.created_at,
             "last_modified": revision_data["timestamp"],
@@ -227,50 +247,57 @@ class DocumentManager:
             "contributors": list(doc.contributors)
         }
         self.save_index()
-        
+
         return doc
-    
+
     def update_document(self, doc_id: str, content: str, username: str, ip_address: str) -> bool:
-        """기존 문서를 수정합니다."""
+        """기존 문서를 수정 (하위 폴더 지원)"""
         if doc_id not in self.index["documents"]:
             return False
-            
+
         doc_info = self.index["documents"][doc_id]
-        doc_path = os.path.join(self.base_path, doc_info["path"].lstrip("/"))
+        doc_path = os.path.join(self.pages_path, doc_info["path"])
+
+        if not os.path.exists(doc_path):
+            return False  # 파일이 존재하지 않으면 실패
         
         # 기존 문서 읽기
         with open(doc_path, "r", encoding="utf-8") as f:
             doc = Document.from_opwi(f.read())
-        
+
         # 새 리비전 추가
         revision_data = doc.update_content(content, username, ip_address)
-        
+
         # 문서 저장
         with open(doc_path, "w", encoding="utf-8") as f:
             f.write(doc.to_opwi())
-        
+
         # 인덱스 업데이트
         doc_info["last_modified"] = revision_data["timestamp"]
         doc_info["revision_count"] = len(doc.revisions)
         doc_info["contributors"] = list(doc.contributors)
         self.save_index()
-        
+
         return True
-    
+
     def get_document(self, doc_id: str) -> Document:
-        """문서를 가져옵니다."""
+        """하위 폴더 포함 문서를 가져오기"""
         if doc_id not in self.index["documents"]:
             return None
-            
-        doc_info = self.index["documents"][doc_id]
-        doc_path = os.path.join(self.base_path, doc_info["path"].lstrip("/"))
         
+        doc_info = self.index["documents"][doc_id]
+        doc_path = os.path.join(self.pages_path, doc_info["path"])
+
+        if not os.path.exists(doc_path):
+            return None
+
         with open(doc_path, "r", encoding="utf-8") as f:
             return Document.from_opwi(f.read())
-    
+
     def get_document_by_path(self, path: str) -> Document:
-        """경로로 문서를 가져옵니다."""
+        """경로를 기반으로 문서를 가져오기 (하위 폴더까지 검색)"""
+        normalized_path = os.path.relpath(path, self.pages_path).replace("\\", "/")
         for doc_id, info in self.index["documents"].items():
-            if info["path"] == path:
+            if info["path"] == normalized_path:
                 return self.get_document(doc_id)
-        return None 
+        return None
