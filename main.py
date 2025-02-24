@@ -159,3 +159,7 @@ if __name__ == "__main__":
     convert_wiki_docs()
     print("Starting Flask server...")
     app.run(debug=True)
+
+def apprun():
+    convert_wiki_docs()
+    return app
