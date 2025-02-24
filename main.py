@@ -3,7 +3,7 @@ import os
 import shutil
 import json
 from flask import Flask, render_template, jsonify, request, redirect, url_for
-from parser import parser
+from opwiparser import parser
 from rev_system.document import DocumentManager
 
 # 현재 디렉토리로 이동
