@@ -108,7 +108,3 @@ python main.py
 5. View history:
    - Click "History" button on document page
    - View all changes and contributors
-
-## License
-
-This project is licensed under the MIT License. 

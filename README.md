@@ -63,22 +63,35 @@ REVBLOCK:END            # 변경사항 블록 끝
 
 ## 설치 방법
 
+### macOS
+
 1. 저장소 클론:
 ```bash
 git clone https://github.com/FamilyMink5/OpenWiki.git
 cd OpenWiki
 ```
 
-2. 가상환경 생성 및 활성화:
+2. 설치:
 ```bash
-python -m venv venv
-source venv/bin/activate  # Linux/Mac
-venv\Scripts\activate     # Windows
+sh build_mac.sh
 ```
 
-3. 의존성 설치:
+4. 서버 실행:
 ```bash
-pip install -r requirements.txt
+python main.py
+```
+
+### Windows
+
+1. 저장소 클론:
+```bash
+git clone https://github.com/FamilyMink5/OpenWiki.git
+cd OpenWiki
+```
+
+2. 설치:
+```bash
+./build.ps1
 ```
 
 4. 서버 실행:
@@ -108,7 +121,3 @@ python main.py
 5. 변경 이력:
    - 문서 페이지에서 "역사" 버튼 클릭
    - 모든 변경사항과 기여자 확인 가능
-
-## 라이선스
-
-이 프로젝트는 MIT 라이선스를 따릅니다. 
