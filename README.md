@@ -63,6 +63,10 @@ REVBLOCK:END            # 변경사항 블록 끝
 
 ## 설치 방법
 
+주의! 아래의 설치방법 내용은 모두 작동하지 않습니다.
+
+자세한 내용은 [Flask 배포 문단](https://flask.palletsprojects.com/en/stable/tutorial/deploy/)을 참고하십시오
+
 ### macOS
 
 1. 저장소 클론:
