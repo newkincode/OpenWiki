@@ -8,3 +8,11 @@ REVUSER:안녕ㄴ나는:127.0.0.1
 REVBLOCK:START
 CHANGES:[{"=0|0|0": ""}]
 REVBLOCK:END
+REVUSER:시노아카입니다:127.0.0.1
+REVBLOCK:START
+CHANGES:[{"+0|10": "아키이빙하겠습니다."}]
+REVBLOCK:END
+REVUSER:시노카아:127.0.0.1
+REVBLOCK:START
+CHANGES:[{"-0|10": "아키이빙하겠습니다."}, {"+1|4": "아키이빙"}]
+REVBLOCK:END

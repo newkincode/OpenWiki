@@ -2,6 +2,7 @@ import json
 import os
 import uuid
 from datetime import datetime
+import difflib
 
 class Document:
     def __init__(self, title: str, namespace: str = "main"):
@@ -38,33 +39,16 @@ class Document:
         return revision
     
     def update_content(self, content: str, username: str, ip_address: str):
-        """문서 내용을 업데이트합니다."""
+        """문서 내용을 업데이트하며 변경 사항을 정확하게 감지"""
         self.contributors.add(username)
         
         # 변경 사항 계산
-        changes = []
-        
-        # 이전 내용이 없으면 전체를 추가로 처리
-        if not self.content:
-            changes.append({
-                f"+0|0|{len(content)}": content
-            })
-        # 새 내용이 없으면 전체를 삭제로 처리
-        elif not content:
-            changes.append({
-                f"-0|0|{len(self.content)}": self.content
-            })
-        # 내용이 다르면 변경 사항 계산
-        elif self.content != content:
-            # 전체 내용이 변경된 것으로 처리
-            changes.append({
-                f"=0|0|{len(content)}": content
-            })
-        
-        # 변경 사항이 없으면 빈 리스트 사용
+        changes = self.diff_lines(self.content, content)
+
+        # 변경 사항이 없으면 저장하지 않음
         if not changes:
-            changes = [{"=0|0|0": ""}]
-        
+            return {"message": "NO_CHANGE"}
+
         revision = {
             "doc_id": self.doc_id,
             "username": username,
@@ -73,11 +57,29 @@ class Document:
             "changes": changes
         }
         self.revisions.append(revision)
-        
+
         # 내용 업데이트
         self.content = content
         
         return revision
+
+    def diff_lines(self, old_text: str, new_text: str):
+        """기존 텍스트와 새 텍스트의 변경 사항을 감지하여 리스트 반환"""
+        old_lines = old_text.splitlines()
+        new_lines = new_text.splitlines()
+        differ = difflib.Differ()
+        diff_result = list(differ.compare(old_lines, new_lines))
+        
+        changes = []
+        for i, line in enumerate(diff_result):
+            if line.startswith("+ "):  # 추가된 줄
+                changes.append({f"+{i}|{len(line[2:])}": line[2:]})
+            elif line.startswith("- "):  # 삭제된 줄
+                changes.append({f"-{i}|{len(line[2:])}": line[2:]})
+            elif line.startswith("? "):  # 수정된 줄 (추가 & 삭제가 모두 포함될 경우)
+                continue
+
+        return changes
     
     def to_opwi(self) -> str:
         """문서를 OPWI 형식으로 변환합니다."""
